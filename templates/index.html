@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikasi Cuaca</title>
+</head>
+<body>
+    <h1>Informasi Cuaca</h1>
+    
+    <form method="POST" action="/search">
+        <input type="text" name="city" placeholder="Masukkan nama kota">
+        <button type="submit">Cari</button>
+    </form>
+
+    {% if data.cod == 200 %}
+        <h2>Cuaca di {{ data.name }}, {{ data.sys.country }}</h2>
+        <p>Suhu: {{ data.main.temp }}°C</p>
+        <p>Kondisi: {{ data.weather[0].description }}</p>
+        <p>Kelembaban: {{ data.main.humidity }}%</p>
+        <p>Kecepatan Angin: {{ data.wind.speed }} m/s</p>
+    {% elif data.cod == '404' %}
+        <p style="color: red">Kota tidak ditemukan!</p>
+    {% endif %}
+</body>
+</html>
